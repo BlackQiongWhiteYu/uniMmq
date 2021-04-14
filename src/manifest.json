@@ -63,5 +63,21 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
+    },
+    "h5": {
+        "devServer": {
+            "disableHostCheck": true,
+            "https": false,
+            "proxy": {
+                "/api": {
+                    "target": "http://118.190.140.13",
+                    "changeOrigin": true,
+                    "secure": false,
+                    "pathRewrite": {
+                        "^/api":""
+                    }
+                }
+            }
+        }
     }
 }
