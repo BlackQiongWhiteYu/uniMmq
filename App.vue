@@ -1,6 +1,7 @@
 <script>
 	import Vue from 'vue'
-	
+  import request from "@/utils/request.js";
+
 	export default {
 		created() {
 			// #ifdef APP-PLUS
@@ -8,10 +9,11 @@
 			// #endif 
 		},
 		onLaunch: function() {
-			
+
 			console.log('App Launch')
 			uni.getSystemInfo({
 				success: function(e) {
+          Vue.prototype.$http = request;
 					// #ifndef MP
 					Vue.prototype.StatusBar = e.statusBarHeight;
 					if (e.platform == 'android') {
@@ -35,12 +37,6 @@
 				}
 			})
 		},
-		onShow: function() {
-			console.log('App 开启')
-		},
-		onHide: function() {
-			console.log('App 关闭')
-		}
 	}
 </script>
 

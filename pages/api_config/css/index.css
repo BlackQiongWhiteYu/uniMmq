@@ -1,0 +1,42 @@
+/* 头部 logo */
+.header {
+  width: 256rpx;
+  height: 256rpx;
+	box-shadow:0rpx 0rpx 60rpx 0rpx rgba(0,0,0,0.1);
+	border-radius:50%;
+	margin-top: 128rpx;
+	margin-bottom: 72rpx;
+	margin-left: auto;
+	margin-right: auto;
+}
+.header image{
+	width:384rpx;
+	height:216rpx;
+  margin-left: -60rpx;
+  margin-top: 20rpx;
+	border-radius:50%;
+}
+.content {
+	display: flex;
+	flex-direction: column;
+	justify-content:center;
+	/* margin-top: 128rpx; */
+}
+
+/* 主体 */
+.main {
+	display: flex;
+	flex-direction: column;
+	padding-left: 70rpx;
+	padding-right: 70rpx;
+}
+/* 
+.mmq-input {
+  border: 1rpx solid #24292E;
+  border-radius: 10rpx;
+  height: 60rpx;
+} */
+
+.wbutton{
+	margin-top: 96rpx;
+}

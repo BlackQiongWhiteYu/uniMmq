@@ -1,21 +1,68 @@
 {
-    "pages": [ //pages数组中第一项表示应用启动页,
+  "pages": [ 
+    {
+      "path": "pages/login/register",
+      "style": {
+        "navigationBarTitleText": "注册"
+      }
+    }, {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    }, {
+      "path": "pages/api_config/index",
+      "style": {
+        "navigationBarTitleText": "量化中心",
+        "enablePullDownRefresh": false
+      }
+    }, {
+      "path": "pages/api_config/addApi",
+      "style": {
+        "navigationBarTitleText": "添加API",
+        "enablePullDownRefresh": false
+      }
+    } ,{
+        "path" : "pages/api_config/apiHtStudy/apiHtStudy",
+        "style" :                                                                                    
         {
-            "path": "pages/login/login",
-            "style": {}
-        }, {
-            "path": "pages/login/forget",
-            "style": {}
-        }, {
-            "path": "pages/login/register",
-            "style": {}
+            "navigationBarTitleText": "",
+            "enablePullDownRefresh": false
         } 
+      }
     ],
-    "globalStyle": {
-    	"navigationBarTextStyle": "black",
-    	"navigationBarTitleText": "搬山量子",
-    	"navigationBarBackgroundColor": "#F8F8F8",
-    	"backgroundColor": "#F8F8F8",
-    	"navigationStyle": "custom" //取消默认的原生导航栏
-    }
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "搬山量子",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom" //取消默认的原生导航栏
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#d4237a",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "position": "bottom",
+    "list": [
+      // {
+      //   "pagePath": "pages/login/login",
+      //   "text": "首页"
+      //   // "iconPath": "static/home_normal.png",
+      //   // "selectedIconPath": "static/home.png"
+      // },
+      {
+        "pagePath": "pages/api_config/index",
+        "text": "量化中心"
+        // "iconPath": "static/home_normal.png",
+        // "selectedIconPath": "static/home.png"
+      },
+      {
+        "pagePath": "pages/login/register",
+        "text": "注册/登录"
+        // "iconPath": "static/me_normal.png",
+        // "selectedIconPath": "static/me.png"
+      }
+    ]
+  }
 }
