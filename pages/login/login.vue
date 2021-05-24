@@ -2,9 +2,7 @@
   <view class="login">
     <view class="content">
       <!-- 头部logo -->
-      <view class="header">
-        <image :src="logoImage"></image>
-      </view>
+      <TitleIcon />
       <!-- 主体表单 -->
       <view class="main">
         <wInput
@@ -24,6 +22,7 @@
       <wButton
         class="wbutton"
         text="登 录"
+				bgColor="#0084F3"
         :rotate="isRotate"
         @click="startLogin"
       ></wButton>
@@ -43,6 +42,8 @@ let _this;
 import wInput from "../../components/watch-login/watch-input.vue"; //input
 import wButton from "../../components/watch-login/watch-button.vue"; //button
 import Logo from '../../static/logo.png'
+import { login } from "@/utils/api.js"
+
 export default {
   data() {
     return {
@@ -82,9 +83,10 @@ export default {
         // error
       }
     },
+	// 跳转注册页面
     goRegister () {
-      uni.switchTab({
-        url: "./register",
+      uni.navigateTo({
+      	url: "./register",
       });
     },
     //登录
@@ -114,37 +116,38 @@ export default {
         title: "登录中",
       });
       try {
-        this.$http
-          .post("/user/login", {
-            passwd: this.password,
-            userName: this.account,
-          })
-          .then((res) => {
-            if (res.code === 0) {
-              uni.showToast({
-                icon: "success",
-                position: "bottom",
-                title: "登录成功",
-                duration: 1000,
-              })
-              uni.hideLoading();
-              //保存用户信息和accessToken
-              let userdata = {
-                accessToken: res?.data?.token,
-              }
-              uni.setStorageSync("userData", userdata); //存入缓存
-              uni.switchTab({
-                url: '../api_config/index',
-              });
-            } else {
-              uni.showToast({
-                position: "bottom",
-                title: "登录异常",
-                duration: 1000,
-              })
-              uni.hideLoading();
-            }
-          });
+		  (async () =>{
+		  	const res = await login({
+				passwd: this.password,
+				userName: this.account
+			})
+		  	if(res.code === 0){
+				uni.showToast({
+				  icon: "success",
+				  position: "bottom",
+				  title: "登录成功",
+				  duration: 1000,
+				})
+				uni.hideLoading();
+				let userdata = {
+				  accessToken: res?.data?.token,
+				}
+				uni.setStorageSync("userData", userdata); //存入缓存
+				// uni.navigateBack({
+				//     delta: 1
+				// });
+				uni.switchTab({
+				    url: '/pages/home/home'
+				});
+			}else{
+				uni.showToast({
+				  position: "bottom",
+				  title: "登录异常",
+				  duration: 1000,
+				})
+			}
+		  })()
+		  
       } catch (e) {
         switch (res.code) {
           case 3:

@@ -42,6 +42,8 @@
 import wInput from "../../components/watch-login/watch-input.vue"; //input
 import wButton from "../../components/watch-login/watch-button.vue"; //button
 import Logo from "../../static/logo.png";
+import { addApiKey } from "@/utils/api.js"
+
 export default {
   data() {
     return {
@@ -104,7 +106,7 @@ export default {
         title: "提交中",
       });
       try {
-        this.$http.post("/account/addApiKey", {
+        addApiKey({
             desc: this.desc,
             accessKey: this.apiKey,
             secret: this.secret,

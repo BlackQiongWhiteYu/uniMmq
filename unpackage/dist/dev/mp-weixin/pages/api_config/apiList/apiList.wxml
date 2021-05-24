@@ -1,0 +1,1 @@
+<view class="api-list-page data-v-9339235c"><block wx:for="{{3}}" wx:for-item="item" wx:for-index="index" wx:key="index"><api-list vue-id="{{'160adcf4-1-'+index}}" class="data-v-9339235c" bind:__l="__l"></api-list></block><u-loadmore style="margin-top:20px;" vue-id="160adcf4-2" status="nomore" class="data-v-9339235c" bind:__l="__l"></u-loadmore></view>

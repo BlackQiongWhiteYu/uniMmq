@@ -127,8 +127,6 @@
 				setTimeout(function(){
 					_this.isRotate=false
 				},3000)
-				
-				
 			}
 		}
 	}

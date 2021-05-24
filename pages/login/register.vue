@@ -53,6 +53,8 @@ let _this;
 import wInput from "../../components/watch-login/watch-input.vue"; //input
 import wButton from "../../components/watch-login/watch-button.vue"; //button
 import Logo from '../../static/logo.png'
+
+import { reg } from "@/utils/api.js"
 export default {
   data() {
     return {
@@ -135,6 +137,7 @@ export default {
     //注册
     async startReg() {
       //注册
+	  
       if (this.isRotate) {
         //判断是否加载中，避免重复点击请求
         return false;
@@ -165,13 +168,13 @@ export default {
       }
       _this.isRotate = true;
       try {
-        this.$http.post("/user/reg", {
-          passwd: this.password,
-          userName: this.account,
-        }).then(res => {
-          setTimeout(() => {
-            _this.isRotate = false;
-          }, 1000)
+		const res =  await reg({
+			passwd: this.password,
+			userName: this.account
+		})
+		setTimeout(() => {
+		  _this.isRotate = false;
+		}, 1000)
           switch (res.code) {
             case 0:
               uni.showToast({
@@ -180,7 +183,7 @@ export default {
               });
               //保存用户信息和accessToken
               let userdata = {
-                accessToken: res?.token,
+                accessToken: res?.data?.token,
               } 
               //存入缓存
               uni.setStorageSync("userData", userdata); 
@@ -199,7 +202,7 @@ export default {
               });
               break
           }
-        })
+        // })
         
       } catch (err) {
         uni.showToast({

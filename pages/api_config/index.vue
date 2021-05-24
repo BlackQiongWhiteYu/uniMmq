@@ -2,9 +2,11 @@
   <view>
     <view class="content">
       <!-- 头部logo -->
-      <view class="header">
+      <!-- <view class="header">
         <image :src="logoImage"></image>
-      </view>
+				<view class="header-title">搬山量子</view>
+      </view> -->
+			<TitleIcon></TitleIcon>
       <!-- 主体 -->
       <view class="main">
         <!-- <wButton
@@ -13,12 +15,22 @@
           :rotate="isRotate"
           @click.native="startApi()"
         ></wButton> -->
-        <navigator style="color: red, float: 'right'" url="addApi" open-type="navigate">添加API</navigator>
+				<view class="navigator">
+					<navigator class="router" url="./apiList/apiList" open-type="navigate">
+						<view class="router-text">API</view>
+						<view class="router-text">列表页</view>
+					</navigator>
+					<navigator class="router" url="./addApi" open-type="navigate">
+						<u-icon name="plus" size="160rpx"></u-icon>
+					</navigator>
+				</view>
+				
       </view>
       <wButton
         v-if="!apiStatus"
         class="wbutton"
         text="一键启动"
+				bgColor="#0084F3"
         :rotate="isStartRotate"
         @click.native="startApi()"
       ></wButton>
@@ -26,6 +38,7 @@
         v-else
         class="wbutton"
         text="一键停止"
+				bgColor="#0084F3"
         :rotate="isStopRotate"
         @click.native="stopApi()"
       ></wButton>
@@ -36,18 +49,20 @@
 <script>
 import wInput from "../../components/watch-login/watch-input.vue"; //input
 import wButton from "../../components/watch-login/watch-button.vue"; //button
-import Logo from "../../static/logo.png";
+// 
+
+import { startRobot, stopRobot } from "@/utils/api.js"
 export default {
   data() {
     return {
-      logoImage: Logo,
       apiStatus: false,
       isStopRotate: false,
       isStartRotate: false,
     };
   },
   mounted() {
-    this.isStart();
+    // this.isStart();
+		this.routerDefend()
   },
   methods: {
     isStart() {
@@ -76,7 +91,7 @@ export default {
         title: "启动中",
       });
       try {
-        this.$http.post("/robot/start")
+        startRobot()
           .then((res) => {
             switch (res.code) {
               case 0:
@@ -121,7 +136,7 @@ export default {
         title: "停止量化中...",
       });
       try {
-        this.$http.post("/robot/stop")
+        stopRobot()
           .then((res) => {
             switch (res.code) {
               case 0:
@@ -156,7 +171,41 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 @import url("../../components/watch-login/css/icon.css");
 @import url("./css/index.css");
+
+.navigator {
+	display: flex;
+	justify-content: space-between;
+	font-family: AlibabaPuHuiTi-Medium, AlibabaPuHuiTi;
+	font-weight: 500;
+	.router {
+		width: 270rpx;
+		height: 270rpx;
+		color: #fff;
+		background: linear-gradient(180deg, #13DCDA 0%, #08B7B3 100%);
+		box-shadow: 0px 0px 42px 0px rgba(0,0,0,0.08);
+		border-radius: 15px;	
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		&:last-child {
+			background: #0084F3;
+		}
+		
+		.router-text {
+			&:first-child {
+				font-size: 96rpx;
+				color: #FFFFFF;
+			}
+			&:last-child {
+				font-size: 31rpx;		
+				color: #FFFFFF;
+			}
+		}
+	}
+	
+}
 </style>
